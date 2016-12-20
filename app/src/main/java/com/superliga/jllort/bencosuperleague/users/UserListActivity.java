@@ -1,5 +1,6 @@
 package com.superliga.jllort.bencosuperleague.users;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -33,5 +34,7 @@ public class UserListActivity extends AppCompatActivity implements ItemFragment.
     @Override
     public void onListFragmentInteraction(DummyContent.DummyItem item) {
 
+        Intent detailIntent = new Intent(UserListActivity.this, UserDetailActivity.class);
+        startActivity(detailIntent);
     }
 }
