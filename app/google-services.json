@@ -40,6 +40,41 @@
           "status": 2
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:931209767418:android:f114ddaf4cea0037",
+        "android_client_info": {
+          "package_name": "com.superliga.jllort.bencosuperleague"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "931209767418-k7a1euqkfo75n26poefh8mbi2s0m4pc3.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "931209767418.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSzqi6-9Oz8NwvUIQLJnJN65ivzIXVRZc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
     }
   ],
   "configuration_version": "1"
