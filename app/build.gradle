@@ -7,8 +7,8 @@ android {
         applicationId "com.superliga.jllort.bencosuperleague"
         minSdkVersion 15
         targetSdkVersion 24
-        versionCode 2
-        versionName "0.0.2 - Bürki"
+        versionCode 3
+        versionName "0.0.3 - Coentrao"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
