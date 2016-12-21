@@ -4,7 +4,7 @@ package com.superliga.jllort.bencosuperleague.dto;
  * Created by jllort on 12/20/2016.
  */
 
-public class Users {
+public class User {
 
     private Integer id;
     private String name;

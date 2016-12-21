@@ -15,8 +15,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
+        
         Button mShowUsersList = (Button) findViewById(R.id.user_list_button);
         mShowUsersList.setOnClickListener(new View.OnClickListener() {
             @Override
