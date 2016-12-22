@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.superliga.jllort.bencosuperleague.R;
+import com.superliga.jllort.bencosuperleague.dto.Constants;
 import com.superliga.jllort.bencosuperleague.dto.User;
 import com.superliga.jllort.bencosuperleague.users.dummy.DummyContent;
 import com.superliga.jllort.bencosuperleague.webservicesclient.UsersWS;
@@ -25,6 +26,8 @@ public class UserListActivity extends AppCompatActivity implements ItemFragment.
 
     private ProgressDialog pd;
 
+    public final static String USER_ID = "com.superliga.jllort.bencosuperleague.users.USER_ID";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,8 +35,8 @@ public class UserListActivity extends AppCompatActivity implements ItemFragment.
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        new DownloadTask().execute(new String[]{XmlPullParser.NO_NAMESPACE});
-        this.pd = ProgressDialog.show(this, "Por favor espere", "Recuperando Numero de Garantias Emitidas", true, false);
+       // new DownloadTask().execute(new String[]{XmlPullParser.NO_NAMESPACE});
+       // this.pd = ProgressDialog.show(this, "Por favor espere", "Recuperando Numero de Garantias Emitidas", true, false);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -47,42 +50,44 @@ public class UserListActivity extends AppCompatActivity implements ItemFragment.
     }
 
     @Override
-    public void onListFragmentInteraction(DummyContent.DummyItem item) {
+    public void onListFragmentInteraction(User item) {
 
         Intent detailIntent = new Intent(UserListActivity.this, UserDetailActivity.class);
+        detailIntent.putExtra(USER_ID, item.getId().toString());
         startActivity(detailIntent);
     }
 
-    public void showResult(String response) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("El numero de garantias es: " + response).setTitle("Estadisticas Gescaucion").setCancelable(false).setNeutralButton("Aceptar",  new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface d, int i) {
+    //public void showResult(String response) {
+    //    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    //    builder.setMessage("El numero de garantias es: " + response).setTitle("Estadisticas Gescaucion").setCancelable(false).setNeutralButton("Aceptar",  new DialogInterface.OnClickListener() {
+     //       public void onClick(DialogInterface d, int i) {
 
-                d.cancel();
+     //           d.cancel();
 
-            }
-        });
-        builder.create().show();
-    }
+      //      }
+     //   });
+     //   builder.create().show();
+    //}
 
 
-private class DownloadTask extends AsyncTask<String, Void, Object> {
-    List<User> response;
+//private class DownloadTask extends AsyncTask<String, Void, Object> {
+ //   List<User> response;
 
-    private DownloadTask() {
-    }
+  //  private DownloadTask() {
+ //   }
 
-    protected Integer doInBackground(String... args) {
-        this.response = new UsersWS().getAllActiveUsers();
+  //  protected Integer doInBackground(String... args) {
+ //       this.response = new UsersWS().getAllActiveUsers();
 
-        return Integer.valueOf(1);
-    }
+  //      return Integer.valueOf(1);
+  //  }
 
-    protected void onPostExecute(Object result) {
-        UserListActivity.this.pd.dismiss();
-        super.onPostExecute(result);
-        UserListActivity.this.showResult(this.response.toString());
-    }
-}
+  //  protected void onPostExecute(Object result) {
+   //     UserListActivity.this.pd.dismiss();
+    //    super.onPostExecute(result);
+    //    UserListActivity.this.use
+    //    UserListActivity.this.showResult(this.response.toString());
+   // }
+//}
 
 }

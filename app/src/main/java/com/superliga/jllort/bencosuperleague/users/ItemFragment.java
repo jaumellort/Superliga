@@ -1,8 +1,12 @@
 package com.superliga.jllort.bencosuperleague.users;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,9 +15,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.superliga.jllort.bencosuperleague.R;
+import com.superliga.jllort.bencosuperleague.dto.User;
 import com.superliga.jllort.bencosuperleague.users.dummy.DummyContent;
 import com.superliga.jllort.bencosuperleague.users.dummy.DummyContent.DummyItem;
+import com.superliga.jllort.bencosuperleague.webservicesclient.UsersWS;
 
+import org.xmlpull.v1.XmlPullParser;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,6 +38,10 @@ public class ItemFragment extends Fragment {
     // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
+
+    private List<User> userList = new ArrayList<User>();
+
+    private ProgressDialog pd;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -54,11 +67,25 @@ public class ItemFragment extends Fragment {
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
+
+
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        new ItemFragment.DownloadTask().execute(new String[]{XmlPullParser.NO_NAMESPACE});
+
+        this.pd = ProgressDialog.show(this.getContext(), "Por favor espere", "Recuperando Numero de Garantias Emitidas", true, false);
+
+        try{
+            Thread.sleep(3000);
+        }catch(InterruptedException e){
+            System.out.println("got interrupted!");
+        }
+
         View view = inflater.inflate(R.layout.fragment_item_list, container, false);
 
         // Set the adapter
@@ -70,7 +97,7 @@ public class ItemFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyItemRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+            recyclerView.setAdapter(new MyItemRecyclerViewAdapter(userList, mListener));
         }
         return view;
     }
@@ -93,6 +120,18 @@ public class ItemFragment extends Fragment {
         mListener = null;
     }
 
+    //public void showResult(String response) {
+    //    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    //    builder.setMessage("El numero de garantias es: " + response).setTitle("Estadisticas Gescaucion").setCancelable(false).setNeutralButton("Aceptar",  new DialogInterface.OnClickListener() {
+    //        public void onClick(DialogInterface d, int i) {
+
+    //            d.cancel();
+
+    //        }
+    //    });
+    //    builder.create().show();
+   // }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -105,6 +144,29 @@ public class ItemFragment extends Fragment {
      */
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
+        void onListFragmentInteraction(User item);
     }
+
+    private class DownloadTask extends AsyncTask<String, Void, Object> {
+        List<User> response;
+
+        private DownloadTask() {
+        }
+
+        protected Integer doInBackground(String... args) {
+            this.response = new UsersWS().getAllActiveUsers();
+            ItemFragment.this.userList = response;
+            return 1;
+        }
+
+        protected void onPostExecute(Object result) {
+            ItemFragment.this.userList = (List<User>)response;
+            ItemFragment.this.pd.dismiss();
+            super.onPostExecute(result);
+
+        }
+    }
+
 }
+
+
