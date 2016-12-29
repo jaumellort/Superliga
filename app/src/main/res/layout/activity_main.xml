@@ -12,40 +12,36 @@
 
     <Button
         android:text="@string/btn_usrs_list"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:id="@+id/user_list_button"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="48dp"
-        android:id="@+id/user_list_button" />
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:text="@string/btn_matches_list"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:id="@+id/next_matches_button"
         android:layout_below="@+id/user_list_button"
-        android:layout_alignRight="@+id/user_list_button"
-        android:layout_alignEnd="@+id/user_list_button"
-        android:layout_marginTop="54dp"
-        android:id="@+id/button2" />
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:text="@string/btn_classification"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/button2"
-        android:layout_alignRight="@+id/button2"
-        android:layout_alignEnd="@+id/button2"
-        android:layout_marginTop="60dp"
-        android:id="@+id/button3" />
+        android:layout_marginTop="10dp"
+        android:id="@+id/classifications_button"
+        android:layout_below="@+id/next_matches_button"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:text="@string/btn_winners"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/button3"
-        android:layout_alignEnd="@+id/button3"
-        android:layout_marginBottom="55dp"
-        android:id="@+id/button4" />
+        android:id="@+id/button4"
+        android:layout_below="@+id/classifications_button"
+        android:layout_marginTop="10dp" />
 </RelativeLayout>
