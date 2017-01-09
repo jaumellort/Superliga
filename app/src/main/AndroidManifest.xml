@@ -36,6 +36,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.superliga.jllort.bencosuperleague.MainActivity" />
         </activity>
+        <activity
+            android:name=".ratings.RatingActivity"
+            android:label="@string/title_activity_rating"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.superliga.jllort.bencosuperleague.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
